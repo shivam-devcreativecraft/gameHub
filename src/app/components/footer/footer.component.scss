@@ -1,0 +1,143 @@
+.footer {
+  background: #111827;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-brand {
+  color: white;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.footer-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+  }
+  
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+.footer-title {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li {
+    margin-bottom: 0.8rem;
+  }
+  
+  a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    &:hover {
+      color: white;
+      
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.newsletter-text {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.newsletter-form {
+  .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 25px;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &:focus {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+  }
+}
+
+.footer-bottom {
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  
+  a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .footer-bottom {
+    text-align: center;
+    
+    .footer-bottom-links {
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

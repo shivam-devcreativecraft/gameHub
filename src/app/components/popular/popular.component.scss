@@ -1,0 +1,174 @@
+.popular-page {
+  padding-top: 100px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--dark) 0%, #111827 100%);
+}
+
+.popular-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.category-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  &.active {
+    background: var(--primary);
+  }
+}
+
+.popular-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    
+    .popular-image img {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.popular-rank {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.popular-image {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  
+  img {
+    max-height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+  }
+}
+
+.popular-content {
+  color: white;
+}
+
+.popular-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  
+  h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+}
+
+.popular-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffc107;
+  
+  span {
+    color: white;
+  }
+}
+
+.popular-stats {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    
+    i {
+      color: var(--primary);
+    }
+  }
+}
+
+.popular-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  
+  .price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  
+  .btn {
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .category-pill {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .popular-card {
+    padding: 1rem;
+  }
+  
+  .popular-image {
+    height: 150px;
+  }
+  
+  .popular-header {
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .popular-price {
+    .price {
+      font-size: 1.1rem;
+    }
+    
+    .btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+} 

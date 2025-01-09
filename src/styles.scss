@@ -1,0 +1,58 @@
+@import 'bootstrap/scss/bootstrap';
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+/* Global variables */
+:root {
+  --primary: #8B5CF6;
+  --dark: #1F2937;
+}
+
+/* Global styles */
+body {
+  background-color: var(--dark);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Common animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1.2);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+  }
+}
+
+/* Common utility classes */
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  &:hover {
+    background-color: darken(#8B5CF6, 10%);
+    border-color: darken(#8B5CF6, 10%);
+  }
+}
+
+/* Common section padding */
+section {
+  padding: 5rem 0;
+  &:first-of-type {
+    padding-top: 7rem;
+  }
+}
+
+/* Common responsive adjustments */
+@media (max-width: 991.98px) {
+  section {
+    padding: 3rem 0;
+    &:first-of-type {
+      padding-top: 5rem;
+    }
+  }
+}
+
