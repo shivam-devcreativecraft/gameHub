@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare var Swiper: any;
 
 @Component({
@@ -9,7 +10,12 @@ declare var Swiper: any;
 export class AppComponent implements OnInit {
   title = 'gamingcontrollers';
 
+  constructor(private router: Router) {
+    this.router.navigate(['/products']);
+  }
+
   ngOnInit() {
+    
     setTimeout(() => {
       this.initializeSwiper();
     }, 100);

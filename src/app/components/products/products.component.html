@@ -12,17 +12,19 @@
       <div class="col-12">
         <div class="filters d-flex justify-content-between align-items-center flex-wrap gap-3">
           <div class="filter-buttons d-flex gap-2">
-            <button class="btn btn-outline-light active">All</button>
-            <button class="btn btn-outline-light">Xbox Series</button>
-            <button class="btn btn-outline-light">Xbox One</button>
-            <button class="btn btn-outline-light">Limited Edition</button>
+            <button *ngFor="let category of categories" 
+                    class="btn btn-outline-light"
+                    [class.active]="selectedCategory === category"
+                    (click)="filterByCategory(category)">
+              {{category}}
+            </button>
           </div>
           <div class="sort-dropdown">
-            <select class="form-select">
-              <option>Sort by: Featured</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest First</option>
+            <select class="form-select" (change)="onSortChange($event)">
+              <option value="featured">Sort by: Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
             </select>
           </div>
         </div>
@@ -31,35 +33,49 @@
 
     <!-- Products Grid -->
     <div class="row g-4">
-      <!-- Product Card -->
-      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of products">
         <div class="product-card">
+          <div class="product-badge">{{product.badge}}</div>
           <div class="product-image">
-            <img [src]="'assets/swiper/swiper' + (i % 4 + 1) + '.png'" [alt]="'Xbox Controller ' + i" class="img-fluid">
-          </div>
-          <div class="product-overlay">
-            <div class="product-badge" *ngIf="i === 1">New</div>
-            <div class="product-badge" *ngIf="i === 2">-15%</div>
-            <div class="product-badge" *ngIf="i === 3">Limited</div>
-            <div class="product-actions">
-              <button class="action-btn"><i class="bi bi-heart"></i></button>
-              <button class="action-btn"><i class="bi bi-cart-plus"></i></button>
-            </div>
+            <img [src]="product.image" [alt]="product.name" class="img-fluid">
           </div>
           <div class="product-info">
-            <h3>Xbox Controller {{i}}</h3>
-            <p class="product-description">Professional gaming controller with customizable buttons and premium design</p>
+            <h3>{{product.name}}</h3>
+            <div class="product-rating mb-2">
+              <ng-container *ngFor="let star of getStars(product.rating)">
+                <i class="bi" [class.bi-star-fill]="star === 1" 
+                   [class.bi-star-half]="star === 0.5"
+                   [class.bi-star]="star === 0"
+                   class="text-warning"></i>
+              </ng-container>
+              <span class="ms-2 text-light-50">({{product.reviewCount | number}}+ reviews)</span>
+            </div>
+            <p class="product-description">{{product.description}}</p>
             <div class="product-price">
-              <span class="current-price">${{149.99 + i * 10}}</span>
-              <span class="original-price">${{169.99 + i * 10}}</span>
+              <span class="current-price">{{formatPrice(product.currentPrice)}}</span>
+              <span class="original-price">{{formatPrice(product.originalPrice)}}</span>
+            </div>
+            <div class="product-actions mt-3">
+              <a [href]="product.amazonLink" class="btn btn-primary rounded-pill w-100">
+                <i class="bi bi-amazon me-2"></i> View on Amazon
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Empty State -->
+    <div class="row mt-5" *ngIf="products.length === 0">
+      <div class="col-12 text-center">
+        <i class="bi bi-search display-1 text-light-50"></i>
+        <h3 class="mt-4">No Products Found</h3>
+        <p class="text-light-50">Try adjusting your filters or check back later for new products.</p>
+      </div>
+    </div>
+
     <!-- Pagination -->
-    <div class="row mt-5">
+    <div class="row mt-5" *ngIf="products.length > 0">
       <div class="col-12">
         <nav aria-label="Page navigation">
           <ul class="pagination justify-content-center">

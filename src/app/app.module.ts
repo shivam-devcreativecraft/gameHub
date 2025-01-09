@@ -7,8 +7,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { TrendingComponent } from './components/trending/trending.component';
-import { PopularComponent } from './components/popular/popular.component';
 
 @NgModule({
   declarations: [
@@ -17,9 +15,7 @@ import { PopularComponent } from './components/popular/popular.component';
     FooterComponent,
     HomeComponent,
     ProductsComponent,
-    CategoriesComponent,
-    TrendingComponent,
-    PopularComponent
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
