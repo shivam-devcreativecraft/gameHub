@@ -109,7 +109,7 @@ export class DataService {
       reviewCount: 2800,
       currentPrice: 15990,
       originalPrice: 17999,
-      amazonLink: 'https://www.amazon.in/Xbox-Elite-Wireless-Controller-Series/dp/B07SFKTLZM',
+      amazonLink: 'https://www.amazon.in/GameSir-G7-Wired-Controller-Windows/dp/B0BM9HRCCV',
       category: 'Xbox Series'
     },
 

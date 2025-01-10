@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService, Product } from '../../services/data.service';
 import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Subscriptio
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   @ViewChild('searchInput') searchInput!: ElementRef;
   
   isSearchVisible = false;
@@ -18,7 +18,14 @@ export class SearchComponent {
   constructor(
     private dataService: DataService,
     private router: Router
-  ) {}
+  ) {
+    this.dataService.getAllProducts().subscribe(products => {
+      this.searchResults = products;
+     });
+  }
+  ngOnInit() {
+
+  }
 
   toggleSearch() {
     this.isSearchVisible = !this.isSearchVisible;
