@@ -1,0 +1,139 @@
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .search-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+
+  .search-box {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 400px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+
+    .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+
+      .search-input {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 0.75rem 1rem;
+        color: white;
+        font-size: 1rem;
+        width: 100%;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .close-search {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+
+    .search-results {
+      margin-top: 1rem;
+      max-height: 400px;
+      overflow-y: auto;
+
+      .search-result-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .result-image {
+          width: 60px;
+          height: 60px;
+          margin-right: 1rem;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .result-info {
+          flex: 1;
+
+          h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: white;
+          }
+
+          .brand {
+            margin: 0.25rem 0;
+            font-size: 0.875rem;
+            color: var(--primary);
+          }
+
+          .price {
+            margin: 0;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Custom Scrollbar
+.search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
