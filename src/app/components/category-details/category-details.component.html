@@ -1,0 +1,67 @@
+<section class="category-details-page">
+  <div class="container py-5">
+    <!-- Back Button -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <button class="btn btn-outline-light back-btn" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Back to Categories
+        </button>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="text-center py-5" *ngIf="loading">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <ng-container *ngIf="!loading">
+      <!-- Category Header -->
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="category-header text-center">
+            <h1 class="mb-4">{{categoryName}} <span class="text-primary">Controllers</span></h1>
+            <p class="text-muted">Explore our collection of {{categoryName}} gaming controllers</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" *ngFor="let product of products">
+          <div class="product-card">
+            <div class="product-badge" *ngIf="product.badge">{{product.badge}}</div>
+            <div class="product-image">
+              <img [src]="product.image" [alt]="product.name" class="img-fluid">
+            </div>
+            <div class="product-content">
+              <h3>{{product.name}}</h3>
+              <p>{{product.description}}</p>
+              <div class="product-meta">
+                <div class="rating">
+                  <i class="bi bi-star-fill"></i>
+                  <span>{{product.rating}}</span>
+                  <small>({{product.reviewCount}} reviews)</small>
+                </div>
+                <div class="price">
+                  <span class="current">₹{{product.currentPrice}}</span>
+                  <span class="original" *ngIf="product.originalPrice > product.currentPrice">₹{{product.originalPrice}}</span>
+                </div>
+              </div>
+              <a [href]="product.amazonLink" target="_blank" class="btn btn-primary w-100">
+                Buy on Amazon
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Products Message -->
+      <div class="text-center py-5" *ngIf="products.length === 0">
+        <p class="text-muted">No products available in this category at the moment.</p>
+      </div>
+    </ng-container>
+  </div>
+</section>

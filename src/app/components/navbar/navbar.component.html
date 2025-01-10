@@ -1,31 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container-fluid px-4">
-    <a class="navbar-brand" routerLink="/">XB Shop</a>
+    <a class="navbar-brand" routerLink="/">GamePad Hub</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-          </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories</a>
+          <a class="nav-link" routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All Controllers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/trending" routerLinkActive="active">Trending</a>
+          <a class="nav-link" routerLink="/brands" [class.active]="isBrandsActive()">Brands</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/popular" routerLinkActive="active">Popular</a>
+          <a class="nav-link" routerLink="/categories" [class.active]="isCategoriesActive()">Categories</a>
         </li>
       </ul>
       <div class="nav-right d-flex align-items-center">
         <a href="#" class="nav-icon"><i class="bi bi-search"></i></a>
-        <a href="#" class="nav-icon"><i class="bi bi-cart"></i></a>
-        <button class="btn btn-primary rounded-pill px-4">Sign Up</button>
       </div>
     </div>
   </div>
