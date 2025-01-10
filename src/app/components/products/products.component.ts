@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import VanillaTilt from 'vanilla-tilt';
 import { DataService, Product } from '../../services/data.service';
 
@@ -11,13 +12,38 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
   categories: string[] = [];
   selectedCategory: string = 'All';
+  
+  // Pagination properties
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  totalItems: number = 0;
+  pages: number[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    // Load products
-    this.dataService.getAllProducts().subscribe(products => {
-      this.products = products;
+    // Check for category or brand in URL parameters
+    this.route.queryParams.subscribe(params => {
+      if (params['category']) {
+        this.selectedCategory = params['category'];
+        this.filterByCategory(this.selectedCategory);
+      } else if (params['brand']) {
+        this.dataService.getProductsByBrand(params['brand']).subscribe(products => {
+          this.products = products;
+          this.totalItems = products.length;
+          this.updatePagination();
+        });
+      } else {
+        // Load all products if no category or brand specified
+        this.dataService.getAllProducts().subscribe(products => {
+          this.products = products;
+          this.totalItems = products.length;
+          this.updatePagination();
+        });
+      }
     });
 
     // Load categories
@@ -27,6 +53,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.initTilt();
+  }
+
+  private initTilt() {
     // Initialize Vanilla-Tilt on product images
     const tiltElements = Array.from(document.querySelectorAll('.product-image img')) as HTMLElement[];
     VanillaTilt.init(tiltElements, {
@@ -43,13 +73,18 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   filterByCategory(category: string) {
     this.selectedCategory = category;
+    this.currentPage = 1; // Reset to first page when filtering
     if (category === 'All') {
       this.dataService.getAllProducts().subscribe(products => {
         this.products = products;
+        this.totalItems = products.length;
+        this.updatePagination();
       });
     } else {
       this.dataService.getProductsByCategory(category).subscribe(products => {
         this.products = products;
+        this.totalItems = products.length;
+        this.updatePagination();
       });
     }
   }
@@ -101,5 +136,46 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   onSortChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.sortProducts(value);
+  }
+
+  // Pagination methods
+  updatePagination() {
+    const totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+    this.pages = Array.from({length: totalPages}, (_, i) => i + 1);
+  }
+
+  setPage(page: number) {
+    if (page >= 1 && page <= Math.ceil(this.totalItems / this.itemsPerPage)) {
+      this.currentPage = page;
+    }
+  }
+
+  getPaginatedProducts(): Product[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.products.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  getPageNumbers(): number[] {
+    const totalPages = this.totalPages;
+    const current = this.currentPage;
+    const pages: number[] = [];
+    
+    if (totalPages <= 5) {
+      return Array.from({length: totalPages}, (_, i) => i + 1);
+    }
+    
+    if (current <= 3) {
+      return [1, 2, 3, 4, 5];
+    }
+    
+    if (current >= totalPages - 2) {
+      return Array.from({length: 5}, (_, i) => totalPages - 4 + i);
+    }
+    
+    return [current - 2, current - 1, current, current + 1, current + 2];
   }
 }

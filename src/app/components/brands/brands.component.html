@@ -1,0 +1,30 @@
+<section class="brands-page">
+  <div class="container py-5">
+    <div class="row mb-5">
+      <div class="col-12">
+        <h1 class="text-center mb-4">Our <span class="text-primary">Brands</span></h1>
+        <p class="text-center text-muted">Discover premium gaming controllers from top brands</p>
+      </div>
+    </div>
+
+    <!-- Brands Grid -->
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let brand of brands">
+        <div class="brand-card" (click)="viewBrand(brand)">
+          <div class="brand-image">
+            <img [src]="getPreviewProduct(brand.name)?.image" [alt]="brand.name" class="img-fluid">
+          </div>
+          <div class="brand-content">
+            <div class="brand-header">
+              <h3>{{brand.name}}</h3>
+              <i [class]="brand.icon" *ngIf="brand.icon"></i>
+            </div>
+            <p>{{getPreviewProduct(brand.name)?.description || 'Explore ' + brand.name + ' gaming controllers'}}</p>
+            <span class="brand-count">{{getProductCount(brand.name)}} Products</span>
+            <a class="brand-link">View Collection <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

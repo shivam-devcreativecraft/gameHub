@@ -3,21 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { BrandsComponent } from './components/brands/brands.component';
+import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
+import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'categories', component: CategoriesComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'brands', component: BrandsComponent },
+  { path: 'brand/:name', component: BrandDetailsComponent },
+  { path: 'category/:name', component: CategoryDetailsComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
-    scrollOffset: [0, 70] // Offset for fixed header
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

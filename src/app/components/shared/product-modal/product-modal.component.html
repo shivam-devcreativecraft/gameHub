@@ -1,39 +1,14 @@
-<section class="products-page">
-  <div class="container py-5">
-    <div class="row mb-5">
-      <div class="col-12">
-        <h1 class="text-center mb-4">Our <span class="text-primary">Products</span></h1>
-        <p class="text-center text-muted">Discover our collection of premium gaming controllers</p>
-      </div>
+<div class="modal-content">
+  <div class="modal-header">
+    <div>
+      <h2 class="modal-title">{{title}}</h2>
+      <p class="text-muted mb-0">{{subtitle}}</p>
     </div>
-
-    <!-- Filters -->
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="filters d-flex justify-content-between align-items-center flex-wrap gap-3">
-          <div class="filter-buttons d-flex gap-2">
-            <button *ngFor="let category of categories" 
-                    class="btn btn-outline-light"
-                    [class.active]="selectedCategory === category"
-                    (click)="filterByCategory(category)">
-              {{category}}
-            </button>
-          </div>
-          <div class="sort-dropdown">
-            <select class="form-select" (change)="onSortChange($event)">
-              <option value="featured">Sort by: Featured</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Products Grid -->
+    <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
     <div class="row g-4">
-      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let product of getPaginatedProducts()">
+      <div class="col-lg-4 col-md-6" *ngFor="let product of getPaginatedProducts()">
         <div class="product-card">
           <div class="product-badge">{{product.badge}}</div>
           <div class="product-image">
@@ -65,17 +40,8 @@
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div class="row mt-5" *ngIf="products.length === 0">
-      <div class="col-12 text-center">
-        <i class="bi bi-search display-1 text-light-50"></i>
-        <h3 class="mt-4">No Products Found</h3>
-        <p class="text-light-50">Try adjusting your filters or check back later for new products.</p>
-      </div>
-    </div>
-
     <!-- Pagination -->
-    <div class="row mt-5" *ngIf="products.length > 0">
+    <div class="row mt-4" *ngIf="products.length > itemsPerPage">
       <div class="col-12">
         <nav aria-label="Product pagination">
           <ul class="pagination justify-content-center">
@@ -101,4 +67,4 @@
       </div>
     </div>
   </div>
-</section>
+</div> 

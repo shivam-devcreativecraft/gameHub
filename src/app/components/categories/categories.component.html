@@ -9,92 +9,16 @@
 
     <!-- Categories Grid -->
     <div class="row g-4">
-      <!-- Xbox Series Category -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
+      <div class="col-lg-4 col-md-6" *ngFor="let category of categories">
+        <div class="category-card" (click)="viewCategory(category)">
           <div class="category-image">
-            <img src="assets/swiper/swiper1.png" alt="Xbox Series Controllers" class="img-fluid">
+            <img [src]="getPreviewProduct(category)?.image" [alt]="category" class="img-fluid">
           </div>
           <div class="category-content">
-            <h3>Xbox Series Controllers</h3>
-            <p>Next-gen gaming controllers with advanced features</p>
-            <span class="category-count">12 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Xbox One Category -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
-          <div class="category-image">
-            <img src="assets/swiper/swiper2.png" alt="Xbox One Controllers" class="img-fluid">
-          </div>
-          <div class="category-content">
-            <h3>Xbox One Controllers</h3>
-            <p>Classic controllers with proven reliability</p>
-            <span class="category-count">8 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Limited Editions -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
-          <div class="category-image">
-            <img src="assets/swiper/swiper3.png" alt="Limited Editions" class="img-fluid">
-          </div>
-          <div class="category-content">
-            <h3>Limited Editions</h3>
-            <p>Exclusive designs for collectors</p>
-            <span class="category-count">5 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Custom Controllers -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
-          <div class="category-image">
-            <img src="assets/swiper/swiper4.png" alt="Custom Controllers" class="img-fluid">
-          </div>
-          <div class="category-content">
-            <h3>Custom Controllers</h3>
-            <p>Personalized gaming experience</p>
-            <span class="category-count">15 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pro Gaming -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
-          <div class="category-image">
-            <img src="assets/swiper/swiper1.png" alt="Pro Gaming" class="img-fluid">
-          </div>
-          <div class="category-content">
-            <h3>Pro Gaming</h3>
-            <p>Professional-grade controllers</p>
-            <span class="category-count">6 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Accessories -->
-      <div class="col-lg-4 col-md-6">
-        <div class="category-card">
-          <div class="category-image">
-            <img src="assets/swiper/swiper2.png" alt="Accessories" class="img-fluid">
-          </div>
-          <div class="category-content">
-            <h3>Accessories</h3>
-            <p>Enhance your gaming setup</p>
-            <span class="category-count">20 Products</span>
-            <a href="#" class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
+            <h3>{{category}}</h3>
+            <p>{{getPreviewProduct(category)?.description || 'Explore our ' + category + ' collection'}}</p>
+            <span class="category-count">{{getProductCount(category)}} Products</span>
+            <a class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
       </div>
