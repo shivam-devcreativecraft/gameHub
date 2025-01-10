@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private router: Router) {}
 
-  isRouteActive(path: string): boolean {
-    return this.router.url.startsWith(path);
+  isBrandsActive(): boolean {
+    return this.router.url === '/brands' || this.router.url.includes('/brand/');
+  }
+
+  isCategoriesActive(): boolean {
+    return this.router.url === '/categories' || this.router.url.includes('/category/');
   }
 }
