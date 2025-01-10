@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,13 +7,9 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const navbar = document.querySelector('.navbar') as HTMLElement;
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+  constructor(private router: Router) {}
+
+  isRouteActive(path: string): boolean {
+    return this.router.url.startsWith(path);
   }
 }
