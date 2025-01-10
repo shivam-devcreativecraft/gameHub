@@ -1,0 +1,38 @@
+<div class="search-container" [class.active]="isSearchVisible">
+  <button class="search-toggle" (click)="toggleSearch()">
+    <i class="bi bi-search"></i>
+  </button>
+  
+  <div class="search-box" *ngIf="isSearchVisible">
+    <div class="search-input-wrapper">
+      <input 
+        #searchInput
+        type="text" 
+        class="search-input" 
+        placeholder="Search controllers..."
+        autocomplete="off"
+      >
+      <button class="close-search" (click)="closeSearch()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <!-- Search Results Dropdown -->
+    <div class="search-results" *ngIf="searchResults.length > 0">
+      <div 
+        class="search-result-item" 
+        *ngFor="let product of searchResults"
+        (click)="selectProduct(product)"
+      >
+        <div class="result-image">
+          <img [src]="product.image" [alt]="product.name">
+        </div>
+        <div class="result-info">
+          <h4>{{product.name}}</h4>
+          <p class="brand">{{product.brand}}</p>
+          <p class="price">₹{{product.currentPrice}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
