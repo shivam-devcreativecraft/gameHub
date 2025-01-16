@@ -50,7 +50,7 @@ export class CategoryDetailsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  goBack() {
+  goBack(): void {
     this.router.navigate(['/categories']);
   }
 

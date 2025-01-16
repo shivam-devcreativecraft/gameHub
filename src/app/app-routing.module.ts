@@ -6,7 +6,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { BrandsComponent } from './components/brands/brands.component';
 import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 
 const routes: Routes = [
@@ -17,7 +16,6 @@ const routes: Routes = [
   { path: 'brands', component: BrandsComponent },
   { path: 'brand/:name', component: BrandDetailsComponent },
   { path: 'category/:name', component: CategoryDetailsComponent },
-  { path: 'search-results', component: SearchResultsComponent },
   { path: 'preview/:id/:name', component: ProductPreviewComponent }
 ];
 

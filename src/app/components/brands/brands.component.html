@@ -10,10 +10,13 @@
     <!-- Brands Grid -->
     <div class="row g-4">
       <div class="col-lg-4 col-md-6" *ngFor="let brand of brands">
-        <div class="brand-card" (click)="viewBrand(brand)">
-          <div class="brand-image">
+        <div class="brand-card">
+          <div class="brand-image" (click)="viewBrand(brand)">
             <img *ngIf="brand.image" [src]="brand.image" [alt]="brand.name" class="img-fluid brand-logo">
             <img *ngIf="!brand.image" [src]="getPreviewProduct(brand.name)?.image" [alt]="brand.name" class="img-fluid">
+          </div>
+          <div class="product-count">
+            <span class="badge">{{getProductCount(brand.name)}} Products</span>
           </div>
           <div class="brand-content">
             <div class="brand-header">
@@ -21,8 +24,11 @@
               <i [class]="brand.icon" *ngIf="brand.icon"></i>
             </div>
             <p>{{getPreviewProduct(brand.name)?.description || 'Explore ' + brand.name + ' gaming controllers'}}</p>
-            <span class="brand-count">{{getProductCount(brand.name)}} Products</span>
-            <a class="brand-link">View Collection <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="view-collection">
+            <button class="btn btn-link text-primary p-0" (click)="viewBrand(brand); $event.stopPropagation()">
+              View Collection <i class="bi bi-arrow-right ms-2"></i>
+            </button>
           </div>
         </div>
       </div>

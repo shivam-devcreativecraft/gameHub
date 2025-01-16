@@ -10,15 +10,21 @@
     <!-- Categories Grid -->
     <div class="row g-4">
       <div class="col-lg-4 col-md-6" *ngFor="let category of categories">
-        <div class="category-card" (click)="viewCategory(category)">
-          <div class="category-image">
+        <div class="category-card">
+          <div class="category-image" (click)="viewCategory(category)">
             <img [src]="getPreviewProduct(category)?.image" [alt]="category" class="img-fluid">
+          </div>
+          <div class="product-count">
+            <span class="badge">{{getProductCount(category)}} Products</span>
           </div>
           <div class="category-content">
             <h3>{{category}}</h3>
             <p>{{getPreviewProduct(category)?.description || 'Explore our ' + category + ' collection'}}</p>
-            <span class="category-count">{{getProductCount(category)}} Products</span>
-            <a class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="view-collection">
+            <button class="btn btn-link text-primary p-0" (click)="viewCategory(category); $event.stopPropagation()">
+              View Collection <i class="bi bi-arrow-right ms-2"></i>
+            </button>
           </div>
         </div>
       </div>

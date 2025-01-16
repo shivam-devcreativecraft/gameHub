@@ -18,7 +18,6 @@ import { ProductModalComponent } from './components/shared/product-modal/product
 import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { SearchComponent } from './components/search/search.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { ProductPreviewComponent } from './components/product-preview/product-pr
     BrandDetailsComponent,
     CategoryDetailsComponent,
     SearchComponent,
-    SearchResultsComponent,
     ProductPreviewComponent
   ],
   imports: [

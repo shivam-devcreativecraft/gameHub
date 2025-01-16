@@ -31,9 +31,9 @@
       <!-- Products Grid -->
       <div class="row g-4">
         <div class="col-lg-4 col-md-6" *ngFor="let product of products">
-          <div class="product-card" (click)="openProductDetails(product)">
+          <div class="product-card">
             <div class="product-badge" *ngIf="product.badge">{{product.badge}}</div>
-            <div class="product-image">
+            <div class="product-image" (click)="openProductDetails(product)">
               <img [src]="product.image" [alt]="product.name" class="img-fluid">
             </div>
             <div class="product-content">
@@ -50,9 +50,11 @@
                   <span class="original" *ngIf="product.originalPrice > product.currentPrice">₹{{product.originalPrice}}</span>
                 </div>
               </div>
-              <a [href]="product.amazonLink" target="_blank" class="btn btn-primary w-100" (click)="$event.stopPropagation()">
-                Buy on Amazon
-              </a>
+            </div>
+            <div class="view-collection">
+              <button class="btn btn-link text-primary p-0" (click)="openProductDetails(product); $event.stopPropagation()">
+                View Collection <i class="bi bi-arrow-right ms-2"></i>
+              </button>
             </div>
           </div>
         </div>

@@ -55,6 +55,9 @@
               <span class="current-price">{{formatPrice(product.currentPrice)}}</span>
               <span class="original-price">{{formatPrice(product.originalPrice)}}</span>
             </div>
+            <button class="btn btn-outline-light rounded-pill mt-2 d-flex align-items-center justify-content-center ms-0" style="width: fit-content;" (click)="openProductDetails(product)">
+              <i class="bi bi-info-circle me-2"></i> More Details
+            </button>
             <div class="product-actions mt-3">
               <a [href]="product.amazonLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-pill w-100">
                 <i class="bi bi-amazon me-2"></i> View on Amazon
