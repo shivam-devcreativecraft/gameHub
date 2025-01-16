@@ -36,8 +36,9 @@
   border: 1px solid rgba(139, 92, 246, 0.1);
   overflow: hidden;
   height: 100%;
-  transition: all 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
   
   &:hover {
     transform: translateY(-5px);
@@ -127,5 +128,28 @@
     .btn {
       margin-top: 0.5rem;
     }
+  }
+}
+
+/* Vanilla-Tilt Customization */
+.js-tilt-glare {
+  border-radius: 12px;
+  background: linear-gradient(105deg, 
+    transparent 20%, 
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 80%
+  );
+}
+
+.js-tilt {
+  transform-style: preserve-3d;
+  background: transparent;
+}
+
+.product-image {
+  img {
+    transform-style: preserve-3d;
+    will-change: transform;
+    filter: drop-shadow(0 20px 30px rgba(139, 92, 246, 0.25));
   }
 }

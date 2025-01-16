@@ -33,7 +33,7 @@
             <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas">All Controllers</a>
+            <a class="nav-link" routerLink="/products" [class.active]="isProductsActive()" data-bs-dismiss="offcanvas">All Controllers</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/brands" [class.active]="isBrandsActive()" data-bs-dismiss="offcanvas">Brands</a>

@@ -46,6 +46,35 @@
             </div>
           </div>
 
+          <!-- Additional Details -->
+          <div class="specs-section">
+            <h3>Specifications</h3>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="label">Connectivity</span>
+                <span class="value">{{product.connectivity || 'Not specified'}}</span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Compatibility</span>
+                <span class="value">{{product.compatibility || 'Universal'}}</span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Category</span>
+                <span class="value">{{product.category}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div class="features-section" *ngIf="product.features && product.features.length > 0">
+            <h3>Key Features</h3>
+            <ul class="features-list">
+              <li *ngFor="let feature of product.features">
+                {{feature}}
+              </li>
+            </ul>
+          </div>
+
           <a [href]="product.amazonLink" target="_blank" class="btn btn-primary buy-now">
             Buy on Amazon <i class="bi bi-arrow-right"></i>
           </a>

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import VanillaTilt from 'vanilla-tilt';
 import { DataService, Product } from '../../services/data.service';
 
@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
   categories: string[] = [];
   selectedCategory: string = 'All';
+  hoveredProduct: Product | null = null;
   
   // Pagination properties
   currentPage: number = 1;
@@ -21,7 +22,8 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -147,6 +149,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   setPage(page: number) {
     if (page >= 1 && page <= Math.ceil(this.totalItems / this.itemsPerPage)) {
       this.currentPage = page;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -177,5 +180,29 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
     
     return [current - 2, current - 1, current, current + 1, current + 2];
+  }
+
+  showPreview(product: Product) {
+    this.hoveredProduct = product;
+  }
+
+  hidePreview() {
+    this.hoveredProduct = null;
+  }
+
+  openProductDetails(product: Product) {
+    // Navigate to preview with product ID and name
+    if (typeof product.id === 'number') {
+      // Convert product name to URL-friendly format
+      const urlFriendlyName = product.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
+        .replace(/(^-|-$)/g, ''); // Remove leading/trailing hyphens
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.router.navigate(['/preview', product.id, urlFriendlyName]);
+    } else {
+      console.error('Invalid product ID:', product.id);
+    }
   }
 }

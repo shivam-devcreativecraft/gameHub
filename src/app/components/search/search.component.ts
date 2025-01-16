@@ -13,18 +13,19 @@ export class SearchComponent implements OnInit {
   
   isSearchVisible = false;
   searchResults: Product[] = [];
+  allProducts: Product[] = [];
   private searchSubscription?: Subscription;
 
   constructor(
     private dataService: DataService,
     private router: Router
-  ) {
-    this.dataService.getAllProducts().subscribe(products => {
-      this.searchResults = products;
-     });
-  }
-  ngOnInit() {
+  ) {}
 
+  ngOnInit() {
+    // Load all products once
+    this.dataService.getAllProducts().subscribe(products => {
+      this.allProducts = products;
+    });
   }
 
   toggleSearch() {
@@ -33,12 +34,21 @@ export class SearchComponent implements OnInit {
       setTimeout(() => {
         this.searchInput.nativeElement.focus();
         this.setupSearchListener();
+        // Show all products initially
+        this.searchResults = [...this.allProducts];
       });
     } else {
       this.searchResults = [];
       if (this.searchSubscription) {
         this.searchSubscription.unsubscribe();
       }
+    }
+  }
+
+  clearSearch() {
+    if (this.searchInput) {
+      this.searchInput.nativeElement.value = '';
+      this.searchResults = [...this.allProducts];
     }
   }
 
@@ -50,32 +60,36 @@ export class SearchComponent implements OnInit {
     this.searchSubscription = fromEvent(this.searchInput.nativeElement, 'input')
       .pipe(
         map((event: any) => event.target.value),
-        filter(text => text.length > 2),
         debounceTime(300),
         distinctUntilChanged()
       )
       .subscribe((searchTerm: string) => {
-        this.performSearch(searchTerm);
+        if (searchTerm.length === 0) {
+          // Show all products when search is empty
+          this.searchResults = [...this.allProducts];
+        } else {
+          this.performSearch(searchTerm);
+        }
       });
   }
 
   private performSearch(searchTerm: string) {
-    this.dataService.getAllProducts().subscribe(products => {
-      this.searchResults = products.filter(product => 
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchTerm.toLowerCase())
-      ).slice(0, 5); // Limit to 5 results
-    });
+    this.searchResults = this.allProducts.filter(product => 
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    ).slice(0, 5); // Limit to 5 results
   }
 
   selectProduct(product: Product) {
-    // Navigate to a new route to show the selected product
-    this.router.navigate(['/search-results'], { 
-      queryParams: { 
-        product: product.id 
-      }
-    });
+    // Convert product name to URL-friendly format
+    const urlFriendlyName = product.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
+      .replace(/(^-|-$)/g, ''); // Remove leading/trailing hyphens
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/preview', product.id, urlFriendlyName]);
     this.closeSearch();
   }
 

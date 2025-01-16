@@ -123,12 +123,84 @@
     }
   }
 
+  .specs-section {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      .spec-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .label {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.875rem;
+        }
+
+        .value {
+          color: white;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .features-section {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        line-height: 1.6;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: var(--primary);
+          font-size: 1.25rem;
+          line-height: 1;
+        }
+      }
+    }
+  }
+
   .buy-now {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
     font-size: 1.1rem;
+    width: 100%;
+    justify-content: center;
     
     i {
       transition: transform 0.3s ease;
@@ -136,6 +208,26 @@
 
     &:hover i {
       transform: translateX(5px);
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .product-info {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .specs-section {
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .price-section {
+      .current-price {
+        font-size: 1.75rem;
+      }
     }
   }
 }

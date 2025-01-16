@@ -42,6 +42,7 @@ export class BrandsComponent implements OnInit {
 
   // Navigate to brand details page
   viewBrand(brand: Brand) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/brand', brand.name]);
   }
 } 

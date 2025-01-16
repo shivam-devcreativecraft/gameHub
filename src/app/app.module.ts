@@ -19,6 +19,7 @@ import { BrandDetailsComponent } from './components/brand-details/brand-details.
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     BrandDetailsComponent,
     CategoryDetailsComponent,
     SearchComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ProductPreviewComponent
   ],
   imports: [
     BrowserModule,

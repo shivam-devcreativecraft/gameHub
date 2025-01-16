@@ -42,6 +42,7 @@ export class CategoriesComponent implements OnInit {
 
   // Navigate to category details page
   viewCategory(category: string) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.router.navigate(['/category', category]);
   }
 } 

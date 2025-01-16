@@ -1,0 +1,88 @@
+<div class="preview-container">
+  <button class="btn-back" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Back to Products
+  </button>
+
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="product-preview" *ngIf="!loading && product">
+    <div class="preview-header">
+      <div class="header-content">
+        <div class="badge-title">
+          <div class="preview-badge" *ngIf="product.badge">{{product.badge}}</div>
+          <h2>{{product.name}}</h2>
+        </div>
+        <div class="rating-section">
+          <div class="stars">
+            <ng-container *ngFor="let star of getStars(product.rating)">
+              <i class="bi" [class.bi-star-fill]="star === 1" 
+                 [class.bi-star-half]="star === 0.5"
+                 [class.bi-star]="star === 0"
+                 class="text-warning"></i>
+            </ng-container>
+          </div>
+          <span class="review-count">({{product.reviewCount | number}}+ reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-content">
+      <div class="preview-image">
+        <img [src]="product.image" [alt]="product.name">
+      </div>
+
+      <div class="preview-details">
+        <div class="preview-price">
+          <span class="current">{{formatPrice(product.currentPrice)}}</span>
+          <span class="original" *ngIf="product.originalPrice > product.currentPrice">
+            {{formatPrice(product.originalPrice)}}
+            <span class="discount">
+              {{calculateDiscount(product.originalPrice, product.currentPrice)}}% OFF
+            </span>
+          </span>
+        </div>
+
+        <div class="preview-info">
+          <h3>Product Details</h3>
+          <p class="preview-description">{{product.description}}</p>
+          
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="label">Brand</span>
+              <span class="value">{{product.brand}}</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">Category</span>
+              <span class="value">{{product.category}}</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">Connectivity</span>
+              <span class="value">{{product.connectivity || 'Not specified'}}</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">Compatibility</span>
+              <span class="value">{{product.compatibility || 'Universal'}}</span>
+            </div>
+          </div>
+
+          <div class="features" *ngIf="product.features?.length">
+            <h3>Key Features</h3>
+            <ul>
+              <li *ngFor="let feature of product.features">{{feature}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="preview-actions">
+          <a [href]="product.amazonLink" target="_blank" rel="noopener noreferrer" class="btn-preview">
+            <i class="bi bi-amazon me-2"></i> View on Amazon
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
