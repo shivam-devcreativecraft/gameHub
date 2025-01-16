@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'gamingcontrollers';
 
   constructor(private router: Router) {
-    this.router.navigate(['/products']);
+    // this.router.navigate(['']);
   }
 
   ngOnInit() {

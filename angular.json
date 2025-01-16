@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gamingcontrollers": {
+    "GameHub": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gamingcontrollers:build:production"
+              "browserTarget": "GameHub:build:production"
             },
             "development": {
-              "browserTarget": "gamingcontrollers:build:development"
+              "browserTarget": "GameHub:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gamingcontrollers:build"
+            "browserTarget": "GameHub:build"
           }
         },
         "test": {
