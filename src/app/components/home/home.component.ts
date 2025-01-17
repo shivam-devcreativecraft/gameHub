@@ -1,40 +1,11 @@
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { register } from 'swiper/element/bundle';
 import VanillaTilt from 'vanilla-tilt';
+import { DataService, Brand, Product, Statistic, Feature, Testimonial, FAQ, ComparisonFeature } from '../../services/data.service';
 
 // Register Swiper custom elements
 register();
-
-interface Brand {
-  name: string;
-  shortName?: string;
-  icon?: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  badge: string;
-  image: string;
-  description: string;
-  rating: number;
-  reviewCount: number;
-  currentPrice: number;
-  originalPrice: number;
-  amazonLink: string;
-}
-
-interface Statistic {
-  value: string;
-  label: string;
-}
-
-interface Feature {
-  icon: string;
-  title: string;
-  description: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -43,101 +14,68 @@ interface Feature {
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  brands: Brand[] = [
-    { name: 'Xbox', icon: 'bi bi-xbox' },
-    { name: 'PS', icon: 'bi bi-playstation' },
-    { name: 'Cosmic Byte', shortName: 'CB' },
-    { name: 'Redgear', shortName: 'RG' }
-  ];
+  brands: Brand[] = [];
+  statistics: Statistic[] = [];
+  features: Feature[] = [];
+  allProducts: Product[] = [];
+  testimonials: Testimonial[] = [];
+  faqs: FAQ[] = [];
+  filteredFaqs: FAQ[] = [];
+  faqSearchQuery: string = '';
+  comparisonFeatures: ComparisonFeature[] = [];
+  popularCategories: any[] = [];
 
-  statistics: Statistic[] = [
-    { value: '200+', label: 'Controllers Compared' },
-    { value: '20K+', label: 'Happy Gamers' },
-    { value: '4.5+', label: 'Average Rating' }
-  ];
-
-  features: Feature[] = [
-    {
-      icon: 'bi bi-patch-check',
-      title: 'Expert Reviews',
-      description: 'In-depth analysis across all price ranges and brands'
-    },
-    {
-      icon: 'bi bi-graph-up',
-      title: 'Price Tracking',
-      description: 'Real-time price comparisons for best value'
-    },
-    {
-      icon: 'bi bi-people',
-      title: 'Community Tested',
-      description: 'Real feedback from Indian gamers'
-    },
-    {
-      icon: 'bi bi-shield-check',
-      title: 'Trusted Links',
-      description: 'Direct links to authorized Indian sellers'
-    }
-  ];
-
-  allProducts: Product[] = [
-    {
-      id: 1,
-      name: 'Xbox Elite Controller',
-      brand: 'Xbox',
-      badge: 'Premium Pick',
-      image: 'assets/swiper/swiper1.png',
-      description: 'Professional gaming controller with customizable buttons',
-      rating: 4.5,
-      reviewCount: 2500,
-      currentPrice: 18999,
-      originalPrice: 19999,
-      amazonLink: '#'
-    },
-    {
-      id: 2,
-      name: 'Cosmic Byte C3070W',
-      brand: 'Cosmic Byte',
-      badge: 'Best Value',
-      image: 'assets/swiper/swiper2.png',
-      description: 'Wireless controller with excellent build quality',
-      rating: 4.0,
-      reviewCount: 1800,
-      currentPrice: 1999,
-      originalPrice: 2499,
-      amazonLink: '#'
-    },
-    {
-      id: 3,
-      name: 'Redgear Pro Wireless',
-      brand: 'Redgear',
-      badge: 'Budget Pick',
-      image: 'assets/swiper/swiper3.png',
-      description: 'Best budget wireless gaming controller',
-      rating: 4.5,
-      reviewCount: 3200,
-      currentPrice: 1499,
-      originalPrice: 1799,
-      amazonLink: '#'
-    }
-  ];
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
-    // Duplicate products for infinite loop
-    this.allProducts = [...this.allProducts, ...this.allProducts];
+    // Fetch data from service
+    this.dataService.getBrands().subscribe(brands => this.brands = brands.slice(0, 3));
+    
+    this.dataService.getStatistics().subscribe(stats => this.statistics = stats);
+    this.dataService.getFeatures().subscribe(features => this.features = features);
+    this.dataService.getTestimonials().subscribe(testimonials => {
+      this.testimonials = testimonials;
+    });
+    this.dataService.getFAQs().subscribe(faqs => {
+      this.faqs = faqs;
+      this.filteredFaqs = faqs;
+    });
+    this.dataService.getComparisonFeatures().subscribe(features => this.comparisonFeatures = features);
 
-    // Initialize Swiper after a short delay to ensure DOM is ready
+    // Fetch premium products
+    this.dataService.getAllProducts().subscribe(products => {
+      this.allProducts = products.filter(product => 
+        product.badge === 'Premium' || product.badge === 'Premium Budget'
+      );
+    });
+
+    // Fetch categories
+    this.dataService.getCategories().subscribe(categories => {
+      this.popularCategories = categories.slice(0, 3)
+        .map(category => ({
+          name: this.dataService.formatCategoryName(category),
+          description: this.dataService.getCategoryDescription(category),
+          icon: this.dataService.getCategoryIcon(category),
+          categoryId: category
+        }));
+    });
+  }
+
+  ngAfterViewInit() {
     setTimeout(() => {
-      const swiperEl = document.querySelector('swiper-container');
-      if (swiperEl) {
-        const swiperParams = {
+      const swipers = document.querySelectorAll('swiper-container');
+      swipers.forEach(swiper => {
+        const isTestimonialSwiper = swiper.closest('#testimonials') !== null;
+        const isProductSwiper = swiper.closest('#products') !== null;
+
+        let swiperConfig = {
           slidesPerView: 1,
           spaceBetween: 30,
-          loop: true,
-          loopedSlides: 3,
           autoplay: {
-            delay: 3000,
+            delay: isTestimonialSwiper ? 5000 : 3000,
             disableOnInteraction: false
           },
+          loop: true,
           pagination: {
             clickable: true,
             type: 'bullets',
@@ -155,28 +93,40 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         };
 
-        // Apply parameters
-        Object.assign(swiperEl, swiperParams);
+        Object.assign(swiper, swiperConfig);
+        // @ts-ignore
+        swiper.initialize();
+        
+        // Start autoplay after initialization
+        setTimeout(() => {
+          if (swiper.swiper && swiper.swiper.autoplay) {
+            swiper.swiper.autoplay.start();
+          }
+        }, 100);
+      });
 
-        // Initialize Swiper
-        swiperEl.initialize();
-      }
-    }, 100);
+      // Initialize Vanilla Tilt on product images
+      const productImages = Array.from(document.querySelectorAll('.product-image')) as HTMLElement[];
+      VanillaTilt.init(productImages, {
+        max: 25,
+        speed: 400,
+        scale: 1.1
+      });
+    });
   }
 
-  ngAfterViewInit() {
-    // Initialize Vanilla-Tilt
-    const tiltElements = Array.from(document.querySelectorAll('.product-image')) as HTMLElement[];
-    VanillaTilt.init(tiltElements, {
-      max: 15,
-      speed: 400,
-      glare: true,
-      'max-glare': 0.3,
-      scale: 1.1,
-      perspective: 1000,
-      transition: true,
-      gyroscope: true
-    });
+  pauseSwiper(event: any) {
+    const swiper = event.target;
+    if (swiper && swiper.swiper && swiper.swiper.autoplay) {
+      swiper.swiper.autoplay.stop();
+    }
+  }
+
+  resumeSwiper(event: any) {
+    const swiper = event.target;
+    if (swiper && swiper.swiper && swiper.swiper.autoplay) {
+      swiper.swiper.autoplay.start();
+    }
   }
 
   getStars(rating: number): number[] {
@@ -204,5 +154,34 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   formatPrice(price: number): string {
     return `₹${price.toLocaleString('en-IN')}`;
+  }
+
+  openProductPreview(product: any): void {
+    const urlFriendlyName = product.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+      
+    this.router.navigate(['/preview', product.id, urlFriendlyName], {
+      state: { from: 'home' }
+    });
+  }
+
+  viewCategory(categoryId: string): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/category', categoryId]);
+  }
+
+  filterFAQs() {
+    if (!this.faqSearchQuery.trim()) {
+      this.filteredFaqs = this.faqs;
+      return;
+    }
+
+    const query = this.faqSearchQuery.toLowerCase().trim();
+    this.filteredFaqs = this.faqs.filter(faq => 
+      faq.question.toLowerCase().includes(query) || 
+      faq.answer.toLowerCase().includes(query)
+    );
   }
 }

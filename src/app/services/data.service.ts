@@ -39,6 +39,25 @@ export interface Feature {
   description: string;
 }
 
+export interface Testimonial {
+  name: string;
+  role: string;
+  image: string;
+  content: string;
+  rating: number;
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface ComparisonFeature {
+  name: string;
+  description: string;
+  icon: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -158,6 +177,72 @@ export class DataService {
       icon: 'bi bi-shield-check',
       title: 'Trusted Links',
       description: 'Direct links to authorized Indian sellers'
+    }
+  ];
+
+  private testimonials: Testimonial[] = [
+    {
+      name: 'Rahul Sharma',
+      role: 'Pro Gamer',
+      image: 'https://i.pravatar.cc/150?img=56',
+      content: 'The controller comparisons helped me find the perfect controller for competitive gaming. Excellent recommendations!',
+      rating: 5
+    },
+    {
+      name: 'Priya Patel',
+      role: 'Casual Gamer',
+      image: 'https://i.pravatar.cc/150?img=49',
+      content: 'As a casual gamer, I was confused about which controller to buy. This site made the decision process so much easier.',
+      rating: 5
+    },
+    {
+      name: 'Amit Kumar',
+      role: 'Gaming Streamer',
+      image: 'https://i.pravatar.cc/150?img=57',
+      content: 'The detailed reviews and price comparisons are invaluable. My viewers always ask where I get my controller recommendations from.',
+      rating: 4.5
+    }
+  ];
+
+  private faqs: FAQ[] = [
+    {
+      question: 'Which gaming controller is best for PC gaming?',
+      answer: 'For PC gaming, both Xbox and PlayStation controllers work well. Xbox controllers have native Windows support, while PS controllers might need additional software. We recommend the Xbox Series X controller for the best plug-and-play experience.'
+    },
+    {
+      question: 'Are budget controllers worth buying?',
+      answer: 'Yes, many budget controllers from brands like Cosmic Byte and Redgear offer great value for casual gaming. While they might lack premium features, they provide good build quality and functionality at their price point.'
+    },
+    {
+      question: 'How long do gaming controllers typically last?',
+      answer: 'With proper care, a quality gaming controller can last 3-5 years. Premium controllers from Xbox and PlayStation typically have better durability than budget options.'
+    },
+    {
+      question: 'Wireless vs Wired controllers - which is better?',
+      answer: 'Both have their advantages. Wireless offers freedom of movement but requires battery management. Wired controllers have zero latency and no battery concerns but limit movement. Your choice should depend on your gaming setup and preferences.'
+    }
+  ];
+
+  private comparisonFeatures: ComparisonFeature[] = [
+    {
+      name: 'Build Quality',
+      description: 'We thoroughly assess the durability and material quality of each controller',
+      icon: 'bi bi-tools'
+    },
+    {
+      name: 'Button Response',
+      description: 'Testing for input lag and button tactility across different games',
+      icon: 'bi bi-lightning'
+    },
+    {
+      name: 'Ergonomics',
+      description: 'Evaluating comfort during extended gaming sessions',
+      icon: 'bi bi-hand-thumbs-up'
+    },
+    {
+      name: 'Value for Money',
+      description: 'Comparing features and performance against price points',
+      icon: 'bi bi-currency-rupee'
     }
   ];
 
@@ -866,6 +951,28 @@ export class DataService {
     }
   ];
 
+  private categoryDescriptions: { [key: string]: string } = {
+    'premium': 'High-end controllers with advanced features',
+    'budget': 'Quality controllers under ₹2,000',
+    'wireless': 'Freedom of movement without cables',
+    'pc': 'Controllers optimized for PC gaming',
+    'ps4': 'Controllers for PlayStation 4',
+    'ps5': 'Controllers for PlayStation 5',
+    'xbox': 'Controllers for Xbox consoles',
+    'mobile': 'Controllers for mobile gaming'
+  };
+
+  private categoryIcons: { [key: string]: string } = {
+    'premium': 'bi bi-star',
+    'budget': 'bi bi-piggy-bank',
+    'wireless': 'bi bi-wifi',
+    'pc': 'bi bi-pc-display',
+    'ps4': 'bi bi-playstation',
+    'ps5': 'bi bi-playstation',
+    'xbox': 'bi bi-xbox',
+    'mobile': 'bi bi-phone'
+  };
+
   constructor() { }
 
   // Brand Methods
@@ -913,5 +1020,31 @@ export class DataService {
   getBrandNames(): Observable<string[]> {
     const brandNames = [...new Set(this.products.map(product => product.brand))];
     return of(brandNames);
+  }
+
+  getTestimonials(): Observable<Testimonial[]> {
+    return of(this.testimonials);
+  }
+
+  getFAQs(): Observable<FAQ[]> {
+    return of(this.faqs);
+  }
+
+  getComparisonFeatures(): Observable<ComparisonFeature[]> {
+    return of(this.comparisonFeatures);
+  }
+
+  formatCategoryName(category: string): string {
+    return category.split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  getCategoryDescription(category: string): string {
+    return this.categoryDescriptions[category] || `Explore our ${this.formatCategoryName(category)} collection`;
+  }
+
+  getCategoryIcon(category: string): string {
+    return this.categoryIcons[category] || 'bi bi-controller';
   }
 } 
