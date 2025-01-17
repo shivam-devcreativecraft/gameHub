@@ -56,63 +56,22 @@
 </section>
 
 <!-- Features Section -->
-<section id="features" class="features-parallax">
-  <div class="parallax-overlay">
-    <div class="container">
-      <div class="row justify-content-center mb-5">
-        <div class="col-lg-6 text-center">
-          <h2 class="section-title">Why Trust <span class="text-primary">Our Reviews</span></h2>
-          <p class="text-secondary">We thoroughly test and compare gaming controllers from premium to budget-friendly options</p>
-        </div>
+<section id="features" class="features-section py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <h2 class="section-title">Why Trust <span class="text-primary">Our Reviews</span></h2>
+        <p class="text-secondary">We thoroughly test and compare gaming controllers from premium to budget-friendly options</p>
       </div>
-      <div class="row">
-        <div class="col-md-3 mb-4 d-flex align-items-stretch">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-patch-check"></i>
-            </div>
-            <h3>Expert Reviews</h3>
-            <p>In-depth analysis across all price ranges and brands</p>
-            <span class="explore-link">
-              Learn More <i class="bi bi-arrow-right"></i>
-            </span>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6" *ngFor="let feature of features">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i [class]="feature.icon"></i>
           </div>
-        </div>
-        <div class="col-md-3 mb-4 d-flex align-items-stretch">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-graph-up"></i>
-            </div>
-            <h3>Price Tracking</h3>
-            <p>Real-time price comparisons for best value</p>
-            <span class="explore-link">
-              Learn More <i class="bi bi-arrow-right"></i>
-            </span>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4 d-flex align-items-stretch">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-people"></i>
-            </div>
-            <h3>Community Tested</h3>
-            <p>Real feedback from Indian gamers</p>
-            <span class="explore-link">
-              Learn More <i class="bi bi-arrow-right"></i>
-            </span>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4 d-flex align-items-stretch">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-shield-check"></i>
-            </div>
-            <h3>Trusted Links</h3>
-            <p>Direct links to authorized Indian sellers</p>
-            <span class="explore-link">
-              Learn More <i class="bi bi-arrow-right"></i>
-            </span>
-          </div>
+          <h3>{{feature.title}}</h3>
+          <p>{{feature.description}}</p>
         </div>
       </div>
     </div>
