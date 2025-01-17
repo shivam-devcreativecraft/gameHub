@@ -1,6 +1,7 @@
 <!-- Hero Section -->
 <section id="hero" class="hero-section position-relative overflow-hidden">
-  <div class="container">
+  <div class="container p-sm-0 p-4">
+    
     <div class="row align-items-center">
       <div class="col-lg-7 hero-content">
         <div class="hero-text">
@@ -10,9 +11,9 @@
             <button class="btn btn-primary btn-lg rounded-pill px-4 py-3 d-flex align-items-center">
               <i class="bi bi-search me-2"></i> Compare Controllers
             </button>
-            <button class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 d-flex align-items-center">
+            <!-- <button class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 d-flex align-items-center">
               <i class="bi bi-info-circle me-2"></i> Buying Guide
-            </button>
+            </button> -->
           </div>
           <div class="mt-5 d-flex gap-4 stats">
             <div class="stat-item" *ngFor="let stat of statistics">
@@ -82,20 +83,25 @@
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-6 text-center">
-        <h2 class="section-title">Top <span class="text-primary">Picks</span></h2>
-        <p class="text-secondary">Best gaming controllers across different price ranges</p>
+        <h2 class="section-title">Premium <span class="text-primary">Selection</span></h2>
+        <p class="text-secondary">Discover our curated collection of premium and premium budget gaming controllers</p>
       </div>
     </div>
-    <div class="product-slider">
-      <swiper-container init="false" class="mySwiper">
+    <div class="product-slider" *ngIf="allProducts.length > 0">
+      <swiper-container 
+        [init]="false"
+        (mouseenter)="pauseSwiper($event)"
+        (mouseleave)="resumeSwiper($event)">
         <swiper-slide *ngFor="let product of allProducts">
           <div class="product-card">
-            <div class="product-badge">{{product.badge}}</div>
+            <div class="product-badge" *ngIf="product.badge">
+              <span class="badge-text">{{product.badge}}</span>
+            </div>
             <div class="product-image">
               <img [src]="product.image" [alt]="product.name" class="img-fluid">
             </div>
             <div class="product-details">
-              <h3>{{product.name}}</h3>
+              <h3 class="product-title">{{product.name}}</h3>
               <div class="product-rating mb-2">
                 <ng-container *ngFor="let star of getStars(product.rating)">
                   <i class="bi" [class.bi-star-fill]="star === 1" 
@@ -103,14 +109,18 @@
                      [class.bi-star]="star === 0"
                      class="text-warning"></i>
                 </ng-container>
-                <span class="ms-2 text-light-50">({{product.reviewCount | number}}+ reviews)</span>
+                <span class="ms-2 text-light-50">({{product.reviewCount | number}} reviews)</span>
               </div>
-              <p>{{product.description}}</p>
+              <p class="product-description">{{product.description}}</p>
               <div class="product-price">
-                <span class="current-price">{{formatPrice(product.currentPrice)}}</span>
-                <span class="original-price">{{formatPrice(product.originalPrice)}}</span>
+                <span class="current-price">₹{{product.currentPrice}}</span>
+                <span class="original-price" *ngIf="product.originalPrice">₹{{product.originalPrice}}</span>
               </div>
               <div class="product-actions">
+                <!-- <button class="btn more-details" (click)="openProductPreview(product)">
+                  <i class="fas fa-info-circle"></i>
+                  More Details
+                </button> -->
                 <a [href]="product.amazonLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-pill w-100">
                   <i class="bi bi-amazon me-2"></i> View on Amazon
                 </a>
@@ -119,6 +129,165 @@
           </div>
         </swiper-slide>
       </swiper-container>
+    </div>
+    <div class="text-center mt-4" *ngIf="allProducts.length === 0">
+      <p class="text-light-50">Loading premium controllers...</p>
+    </div>
+  </div>
+</section>
+
+<!-- Popular Categories Section -->
+<section id="categories" class="home-categories-section py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <h2 class="section-title">Browse by <span class="text-primary">Category</span></h2>
+        <p class="text-secondary">Find the perfect controller for your gaming style</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-4" *ngFor="let category of popularCategories">
+        <a (click)="viewCategory(category.categoryId)" class="category-card" style="cursor: pointer;">
+          <div class="category-icon">
+            <i [class]="category.icon"></i>
+          </div>
+          <h3>{{category.name}}</h3>
+          <p>{{category.description}}</p>
+          <span class="explore-link">
+            Explore <i class="bi bi-arrow-right"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Process Section -->
+<section id="comparison" class="comparison-section py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <h2 class="section-title">Our <span class="text-primary">Comparison Process</span></h2>
+        <p class="text-secondary">How we evaluate and compare gaming controllers</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" *ngFor="let feature of comparisonFeatures">
+        <div class="comparison-card">
+          <div class="comparison-icon">
+            <i [class]="feature.icon"></i>
+          </div>
+          <h3>{{feature.name}}</h3>
+          <p>{{feature.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials-section py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <h2 class="section-title">What Gamers <span class="text-primary">Say</span></h2>
+        <p class="text-secondary">Real feedback from our gaming community</p>
+      </div>
+    </div>
+    <div class="testimonials-slider" *ngIf="testimonials.length > 0">
+      <swiper-container 
+        [init]="false"
+        (mouseenter)="pauseSwiper($event)"
+        (mouseleave)="resumeSwiper($event)">
+        <swiper-slide *ngFor="let testimonial of testimonials">
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <img [src]="testimonial.image" [alt]="testimonial.name" class="testimonial-avatar">
+              <div class="testimonial-info">
+                <h4>{{testimonial.name}}</h4>
+                <p class="role">{{testimonial.role}}</p>
+                <div class="rating">
+                  <ng-container *ngFor="let star of getStars(testimonial.rating)">
+                    <i class="bi" [class.bi-star-fill]="star === 1" 
+                       [class.bi-star-half]="star === 0.5"
+                       [class.bi-star]="star === 0"
+                       class="text-warning"></i>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <p class="testimonial-content">{{testimonial.content}}</p>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+    <div class="text-center mt-4" *ngIf="testimonials.length === 0">
+      <p class="text-light-50">Loading testimonials...</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section py-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <h2 class="section-title">Frequently Asked <span class="text-primary">Questions</span></h2>
+        <p class="text-secondary">Get answers to common questions about gaming controllers</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="search-container">
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search frequently asked questions..." 
+            [(ngModel)]="faqSearchQuery"
+            (input)="filterFAQs()">
+        </div>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item" *ngFor="let faq of filteredFaqs; let i = index">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" [class.collapsed]="i !== 0"
+                      [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#faq' + i"
+                      [attr.aria-expanded]="i === 0" [attr.aria-controls]="'faq' + i">
+                <i class="bi bi-plus-lg faq-icon"></i>
+                {{faq.question}}
+              </button>
+            </h2>
+            <div [id]="'faq' + i" class="accordion-collapse collapse" [class.show]="i === 0"
+                 [attr.data-bs-parent]="'#faqAccordion'">
+              <div class="accordion-body">
+                {{faq.answer}}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="filteredFaqs.length === 0" class="text-center py-4">
+            <p class="text-secondary">No matching questions found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section id="cta" class="cta-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title mb-4">Ready to Find Your Perfect Controller?</h2>
+        <p class="lead mb-4">Compare prices, features, and reviews of the best gaming controllers available in India</p>
+        <div class="d-flex justify-content-center gap-3">
+          <button class="btn btn-primary btn-lg rounded-pill px-4">
+            Start Comparing
+          </button>
+          <!-- <button class="btn btn-outline-light btn-lg rounded-pill px-4">
+            View Buying Guide
+          </button> -->
+        </div>
+      </div>
     </div>
   </div>
 </section>

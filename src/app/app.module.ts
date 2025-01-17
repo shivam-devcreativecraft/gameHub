@@ -15,6 +15,7 @@ import { register } from 'swiper/element/bundle';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
+import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 
 register(); // Register Swiper custom elements
 
@@ -30,7 +31,8 @@ register(); // Register Swiper custom elements
     CategoryDetailsComponent,
     SearchComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    ScrollTopComponent
   ],
   imports: [
     BrowserModule,
