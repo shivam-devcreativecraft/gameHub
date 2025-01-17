@@ -13,13 +13,20 @@ export class ProductPreviewComponent implements OnInit {
   product!: Product;
   loading: boolean = true;
   productName: string = '';
+  navigationState: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataService,
     private titleService: Title
-  ) {}
+  ) {
+    // Store navigation state when component is created
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.navigationState = navigation.extras.state;
+    }
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -107,7 +114,23 @@ export class ProductPreviewComponent implements OnInit {
     return `₹${price.toLocaleString('en-IN')}`;
   }
 
-  goBack() {
-    this.router.navigate(['/products']);
+  getBackButtonText(): string {
+    if (this.navigationState?.from === 'brand') {
+      return 'Back to Brands';
+    } else if (this.navigationState?.from === 'category') {
+      return 'Back to Categories';
+    }
+    return 'Back to Products';
+  }
+
+  goBack(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.navigationState?.returnTo) {
+      // Navigate back to the listing page (brands or categories)
+      this.router.navigate([this.navigationState.returnTo]);
+    } else {
+      // Default fallback to products
+      this.router.navigate(['/products']);
+    }
   }
 } 

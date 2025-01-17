@@ -12,7 +12,9 @@
   padding: 0.5rem 1rem;
   border-radius: 50px;
   transition: all 0.3s ease;
-  
+  color: var(--primary);
+
+
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateX(-5px);
@@ -70,11 +72,11 @@
     min-height: 280px;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
     &:hover {
       transform: scale(1.05);
     }
-    
+
     img {
       width: 90%;
       height: auto;
@@ -149,15 +151,19 @@
     background: rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
+    display: flex;
+    flex-direction: column;
 
     .btn-link {
       color: var(--primary);
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s ease;
+      width: fit-content;
 
       &:hover {
         opacity: 0.8;
+
         i {
           transform: translateX(5px);
         }
@@ -173,11 +179,10 @@
 /* Vanilla-Tilt Customization */
 .js-tilt-glare {
   border-radius: 12px;
-  background: linear-gradient(105deg, 
-    transparent 20%, 
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 80%
-  );
+  background: linear-gradient(105deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 80%);
 }
 
 .js-tilt {

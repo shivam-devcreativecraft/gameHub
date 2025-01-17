@@ -53,9 +53,14 @@
               </div>
             </div>
             <div class="view-collection">
-              <button class="btn btn-link text-primary p-0" (click)="openProductDetails(product); $event.stopPropagation()">
-                View Collection <i class="bi bi-arrow-right ms-2"></i>
+              <button class="btn btn-link text-primary p-0 mb-3" (click)="openProductDetails(product); $event.stopPropagation()">
+                <!-- View Collection <i class="bi bi-arrow-right ms-2"></i> -->
+              <i class="bi bi-info-circle me-2"></i> More Details
+
               </button>
+              <a [href]="product.amazonLink" target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-pill w-100">
+                <i class="bi bi-amazon me-2"></i> View on Amazon
+              </a>
             </div>
           </div>
         </div>

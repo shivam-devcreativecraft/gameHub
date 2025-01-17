@@ -1,120 +1,138 @@
 .brands-page {
-  padding-top: 100px;
-  min-height: 100vh;
-  background: linear-gradient(180deg, var(--dark) 0%, #111827 100%);
+  padding: 2rem 0;
+  margin-top:5rem;
+  
+  .section-title {
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: var(--text-muted) !important;
+    }
+  }
 }
 
 .brand-card {
-  background: var(--dark);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+
   overflow: hidden;
   height: 100%;
   transition: all 0.3s ease;
-  position: relative;
   display: flex;
   flex-direction: column;
-
+  
   &:hover {
     transform: translateY(-5px);
     border-color: var(--primary);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
   }
-
+  
   .brand-image {
-    height: 200px;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
     position: relative;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    img {
-      max-height: 100%;
-      width: auto;
-      object-fit: contain;
+    min-height: 380px;
+    max-height: 380px;
+    background: transparent;
+    flex-shrink: 0;
+    
+    // .badge {
+    //   position: absolute;
+    //   top: 1rem;
+    //   right: 1rem;
+    //   background: rgba(139, 92, 246, 0.2);
+    //   color: var(--primary);
+    //   padding: 0.5rem 1rem;
+    //   border-radius: 50px;
+    //   font-size: 0.875rem;
+    //   font-weight: 500;
+    //   z-index: 2;
+    // }
+    
+    swiper-container {
+      width: 100%;
+      height: 380px;
       
-      &.brand-logo {
-        max-width: 200px;
+      swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        
+        img {
+          width: 100%;
+          height: auto;
+          max-height: 340px;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+          cursor: pointer;
+          
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
       }
     }
   }
-
+  
   .brand-content {
     padding: 1.5rem;
     flex: 1;
-
-    .brand-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    border-radius: 0 0 24px 24px;
+    
+    h3 {
+      font-size: 1.25rem;
       margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 800;
 
-      h3 {
-        font-size: 1.25rem;
-        margin: 0;
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      i {
-        font-size: 1.5rem;
-        color: var(--primary);
-      }
     }
-
+    
     p {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 0.875rem;
       margin-bottom: 1rem;
-      line-height: 1.5;
+      font-size: 0.9rem;
+      flex: 1;
     }
-  }
-
-  .product-count {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-
+    
     .badge {
-      background: rgba(139, 92, 246, 0.2);
+      background: rgba(139, 92, 246, 0.2) !important;
       color: var(--primary);
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 50px;
-      font-size: 0.875rem;
+      font-size: 1rem;
       font-weight: 500;
+      white-space: nowrap;
     }
-  }
-
-  .view-collection {
-    padding: 1rem 1.5rem;
-    background: rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: center;
-
+    
     .btn-link {
-      color: var(--primary);
+      font-size: 0.9rem;
       text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-
+      color: var(--primary);
+      padding: 0;
+      
+      i {
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+      }
+      
       &:hover {
-        opacity: 0.8;
         i {
           transform: translateX(5px);
         }
       }
-
-      i {
-        transition: transform 0.3s ease;
-      }
     }
   }
+}
+
+/* Vanilla-Tilt Customization */
+.js-tilt-glare {
+  border-radius: 12px;
 } 

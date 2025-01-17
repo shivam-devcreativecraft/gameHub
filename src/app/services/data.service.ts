@@ -7,6 +7,7 @@ export interface Brand {
   shortName?: string;
   icon?: string;
   image?: string;
+  description: string;
 }
 
 export interface Product {
@@ -43,24 +44,98 @@ export interface Feature {
 })
 export class DataService {
   private brands: Brand[] = [
-    { id: 1, name: 'Xbox', icon: 'bi bi-xbox', image: 'assets/brandicons/xbox.png' },
-    { id: 2, name: 'PlayStation', icon: 'bi bi-playstation', shortName: 'PS', image: 'assets/brandicons/playstation.png' },
-    { id: 3, name: 'Cosmic Byte', shortName: 'CB', image: 'assets/brandicons/cosmicbyte.png' },
-    { id: 4, name: 'Redgear', shortName: 'RG', image: 'assets/brandicons/redgearlogo.png' },
-    { id: 5, name: 'PowerA', shortName: 'PA', image: 'assets/brandicons/poweralogo.png' },
-    { id: 6, name: 'Logitech', shortName: 'LG', image: 'assets/brandicons/logitech.png' },
-    { id: 7, name: 'Razer', shortName: 'RZ', image: 'assets/brandicons/razer.png' },
-    { id: 8, name: 'EvoFox', shortName: 'EF', image: 'assets/brandicons/evofoxlogo.png' },
-    { id: 9, name: 'SteelSeries', shortName: 'SS', image: 'assets/brandicons/steelSerieslogo.png' },
-    { id: 10, name: 'Nintendo', icon: 'bi bi-nintendo-switch', shortName: 'NS', image: 'assets/brandicons/nintendoLogo.png' },
-    { id: 11, name: 'PDP', shortName: 'PDP', image: 'assets/brandicons/pdplogo.png' },
-    { id: 12, name: '8BitDo', shortName: '8BD', image: 'assets/brandicons/8bitdologo.png' }
+    { 
+      id: 1, 
+      name: 'Xbox', 
+      icon: 'bi bi-xbox', 
+      image: 'assets/brandicons/xbox.png', 
+      description: 'Official Xbox controllers featuring premium build quality, wireless connectivity, and perfect compatibility with Xbox consoles and Windows PC.'
+    },
+    { 
+      id: 2, 
+      name: 'PlayStation', 
+      icon: 'bi bi-playstation', 
+      shortName: 'PS', 
+      image: 'assets/brandicons/playstation.png', 
+      description: 'Innovative PlayStation controllers with advanced haptic feedback, adaptive triggers, and seamless integration with PS5 and PS4 consoles.'
+    },
+    { 
+      id: 3, 
+      name: 'Cosmic Byte', 
+      shortName: 'CB', 
+      image: 'assets/brandicons/cosmicbyte.png', 
+      description: 'Budget-friendly gaming controllers offering great value with features like programmable buttons, RGB lighting, and multi-platform compatibility.'
+    },
+    { 
+      id: 4, 
+      name: 'Redgear', 
+      shortName: 'RG', 
+      image: 'assets/brandicons/redgearlogo.png', 
+      description: 'Popular Indian gaming brand known for affordable controllers with illuminated buttons, vibration feedback, and durable construction.'
+    },
+    { 
+      id: 5, 
+      name: 'PowerA', 
+      shortName: 'PA', 
+      image: 'assets/brandicons/poweralogo.png', 
+      description: 'Licensed gaming accessories manufacturer producing high-quality controllers with advanced gaming features at competitive prices.'
+    },
+    { 
+      id: 6, 
+      name: 'Logitech', 
+      shortName: 'LG', 
+      image: 'assets/brandicons/logitech.png', 
+      description: 'Premium gaming peripherals brand offering controllers with precision controls, customizable buttons, and reliable wireless technology.'
+    },
+    { 
+      id: 7, 
+      name: 'Razer', 
+      shortName: 'RZ', 
+      image: 'assets/brandicons/razer.png', 
+      description: 'High-end gaming brand known for controllers with mechanical buttons, customizable profiles, and premium build quality with Chroma RGB.'
+    },
+    { 
+      id: 8, 
+      name: 'EvoFox', 
+      shortName: 'EF', 
+      image: 'assets/brandicons/evofoxlogo.png', 
+      description: 'Indian gaming brand offering feature-rich controllers with programmable buttons, adjustable vibration, and multi-platform support.'
+    },
+    { 
+      id: 9, 
+      name: 'SteelSeries', 
+      shortName: 'SS', 
+      image: 'assets/brandicons/steelSerieslogo.png', 
+      description: 'Professional gaming peripherals manufacturer delivering controllers with customizable settings, precision controls, and cross-platform compatibility.'
+    },
+    { 
+      id: 10, 
+      name: 'Nintendo', 
+      icon: 'bi bi-nintendo-switch', 
+      shortName: 'NS', 
+      image: 'assets/brandicons/nintendoLogo.png', 
+      description: 'Innovative Nintendo controllers featuring unique designs, motion controls, HD rumble, and perfect integration with Nintendo Switch.'
+    },
+    { 
+      id: 11, 
+      name: 'PDP', 
+      shortName: 'PDP', 
+      image: 'assets/brandicons/pdplogo.png', 
+      description: 'Performance Designed Products specializing in gaming controllers with custom features, RGB lighting, and officially licensed designs.'
+    },
+    { 
+      id: 12, 
+      name: '8BitDo', 
+      shortName: '8BD', 
+      image: 'assets/brandicons/8bitdologo.png', 
+      description: 'Retro-inspired controllers with modern features, offering excellent build quality, customizable buttons, and broad platform compatibility.'
+    }
   ];
 
   private statistics: Statistic[] = [
     { value: '200+', label: 'Controllers Compared' },
     { value: '20K+', label: 'Happy Gamers' },
-    { value: '4.5+', label: 'Average Rating' }
+    { value: '3.5+', label: 'Average Rating' }
   ];
 
   private features: Feature[] = [

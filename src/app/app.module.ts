@@ -1,50 +1,44 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProductsComponent } from './components/products/products.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { PopularComponent } from './components/popular/popular.component';
-import { TrendingComponent } from './components/trending/trending.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductsComponent } from './components/products/products.component';
 import { BrandsComponent } from './components/brands/brands.component';
-import { ProductModalComponent } from './components/shared/product-modal/product-modal.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { SearchComponent } from './components/search/search.component';
-import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
+import { FormsModule } from '@angular/forms';
+import { register } from 'swiper/element/bundle';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CommonModule, DecimalPipe } from '@angular/common';
+
+register(); // Register Swiper custom elements
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ProductsComponent,
-    CategoriesComponent,
-    PopularComponent,
-    TrendingComponent,
-    FooterComponent,
     NavbarComponent,
+    ProductsComponent,
     BrandsComponent,
-    ProductModalComponent,
+    CategoriesComponent,
+    ProductPreviewComponent,
     BrandDetailsComponent,
     CategoryDetailsComponent,
     SearchComponent,
-    ProductPreviewComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,
-    NgbModule
+    FormsModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

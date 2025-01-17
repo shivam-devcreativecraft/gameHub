@@ -62,20 +62,19 @@ export class BrandDetailsComponent implements OnInit, AfterViewInit {
   }
 
   openProductDetails(product: Product) {
-    // Navigate to preview with product ID and name
     if (typeof product.id === 'number') {
-      // Convert product name to URL-friendly format
       const urlFriendlyName = product.name
         .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric chars with hyphens
-        .replace(/(^-|-$)/g, ''); // Remove leading/trailing hyphens
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       this.router.navigate(['/preview', product.id, urlFriendlyName], {
-        state: { from: 'brand' }
+        state: { 
+          from: 'brand',
+          returnTo: `/brand/${product.brand}`
+        }
       });
-    } else {
-      console.error('Invalid product ID:', product.id);
     }
   }
 }

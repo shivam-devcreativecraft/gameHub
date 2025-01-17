@@ -5,6 +5,25 @@
   background: linear-gradient(180deg, var(--dark) 0%, #111827 100%);
   position: relative;
 
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    color: var(--primary);
+    
+    &:hover {
+      background: rgba(139, 92, 246, 0.1);
+      transform: translateX(-5px);
+    }
+
+    i {
+      font-size: 1.25rem;
+    }
+  }
+
   .btn-back {
     position: absolute;
     top: 2rem;
