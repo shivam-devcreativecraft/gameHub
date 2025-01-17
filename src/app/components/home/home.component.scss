@@ -164,6 +164,117 @@
   }
 }
 
+.features-parallax {
+  position: relative;
+  background: url('/assets/products/ps5dualsense.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 50px 0;
+
+  .parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .section-title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    .text-primary {
+      color: var(--primary) !important;
+    }
+  }
+
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 1.1rem;
+  }
+
+  .feature-card {
+    background: rgba(17, 24, 39, 0.95);
+    border-radius: 24px;
+    padding: 2rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    text-decoration: none;
+    display: block;
+
+    &:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      background: rgba(17, 24, 39, 0.95);
+
+      .icon-wrapper {
+        background: var(--primary);
+        i {
+          transform: scale(1.2);
+          color: white;
+        }
+      }
+
+      .explore-link {
+        color: var(--primary);
+        i {
+          transform: translateX(5px);
+        }
+      }
+    }
+
+    .icon-wrapper {
+      width: 60px;
+      height: 60px;
+      background: rgba(139, 92, 246, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+
+      i {
+        font-size: 1.5rem;
+        color: var(--primary);
+        transition: all 0.3s ease;
+      }
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .explore-link {
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      i {
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}
+
 /* Products Section */
 .products-section {
   background: linear-gradient(180deg, var(--dark) 0%, #111827 100%);
