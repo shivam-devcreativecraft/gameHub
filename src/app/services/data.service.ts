@@ -201,6 +201,27 @@ export class DataService {
       image: 'https://i.pravatar.cc/150?img=57',
       content: 'The detailed reviews and price comparisons are invaluable. My viewers always ask where I get my controller recommendations from.',
       rating: 4.5
+    },
+    {
+      name: 'Neha Singh',
+      role: 'ESports Player',
+      image: 'https://i.pravatar.cc/150?img=45',
+      content: 'The in-depth analysis of controller responsiveness and button layouts helped me choose the perfect controller for tournaments.',
+      rating: 5
+    },
+    {
+      name: 'Vikram Reddy',
+      role: 'Game Developer',
+      image: 'https://i.pravatar.cc/150?img=52',
+      content: 'As a game developer, I appreciate the technical details in the reviews. It helps me understand how players interact with different controllers.',
+      rating: 4.5
+    },
+    {
+      name: 'Ananya Gupta',
+      role: 'Gaming Enthusiast',
+      image: 'https://i.pravatar.cc/150?img=41',
+      content: 'The budget-friendly recommendations are spot on! Found a great controller that didn\'t break the bank.',
+      rating: 5
     }
   ];
 

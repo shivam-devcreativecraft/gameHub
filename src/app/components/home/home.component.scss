@@ -352,16 +352,33 @@
 }
 
 // Swiper custom styles
-swiper-container {
-  padding: 20px 0 40px;
-  
-  --swiper-navigation-size: 18px;
-  --swiper-navigation-color: var(--primary);
-  --swiper-navigation-background: rgba(139, 92, 246, 0.2);
-  --swiper-navigation-border-radius: 50%;
-  --swiper-navigation-sides-offset: 10px;
-  --swiper-navigation-width: 40px;
-  --swiper-navigation-height: 40px;
+::ng-deep {
+  .swiper {
+    padding-bottom: 80px !important;
+  }
+
+  .swiper-pagination {
+    bottom: 0 !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    
+    &.swiper-pagination-bullet-active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    &:hover {
+      background: var(--primary);
+    }
+  }
+}
+
+swiper-pagination {
+  bottom: -60px !important;
+  position: absolute !important;
 }
 
 swiper-button-next,
@@ -381,20 +398,6 @@ swiper-button-prev {
 
 swiper-button-next {
   right: 10px;
-}
-
-swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
-  
-  &.swiper-pagination-bullet-active {
-    background: var(--primary);
-    transform: scale(1.2);
-  }
-
-  &:hover {
-    background: var(--primary);
-  }
 }
 
 @media (max-width: 768px) {
@@ -680,9 +683,15 @@ swiper-pagination-bullet {
 .testimonials-slider {
   position: relative;
   padding: 20px 0;
+  margin-bottom: 60px;
   
   swiper-container {
-    padding: 20px 0 60px;
+    --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.5);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-size: 8px;
+    --swiper-pagination-bullet-horizontal-gap: 6px;
+    --swiper-pagination-color: var(--primary);
+    padding: 20px 0 80px;
     
     swiper-slide {
       height: auto;
@@ -692,6 +701,14 @@ swiper-pagination-bullet {
       padding: 1rem;
     }
   }
+}
+
+.swiper-pagination {
+  position: absolute;
+  bottom: 0 !important;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .testimonial-card {
@@ -704,6 +721,7 @@ swiper-pagination-bullet {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  margin-bottom: 40px;
 
   &:hover {
     transform: translateY(-5px);
@@ -749,6 +767,12 @@ swiper-pagination-bullet {
     font-style: italic;
     margin: 0;
     line-height: 1.6;
+  }
+}
+
+::ng-deep .testimonials-slider {
+  .swiper-pagination {
+    bottom: -40px !important;
   }
 }
 
