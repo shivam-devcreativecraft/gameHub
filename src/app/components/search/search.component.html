@@ -1,6 +1,6 @@
 <div class="search-container" [class.active]="isSearchVisible">
   <button class="search-toggle" (click)="toggleSearch()">
-   <i class="bi bi-search me-2"></i>Search
+   <i class="bi bi-search me-2"></i>
   </button>
   
   <div class="search-box" *ngIf="isSearchVisible">
@@ -12,7 +12,7 @@
         placeholder="Search controllers..."
         autocomplete="off"
       >
-      <button class="close-search" (click)="closeSearch()">
+      <button class="close-search" (click)="clearSearch()">
         <i class="bi bi-x"></i>
       </button>
     </div>

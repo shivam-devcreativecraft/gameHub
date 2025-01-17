@@ -1,24 +1,45 @@
 <section class="categories-page">
-  <div class="container py-5">
+  <div class="container">
+    <!-- <div class="section-title text-center">
+      <h1 class="text-center">Product <span class="text-primary">Categories</span></h1>
+
+      <p class="text-center text-secondary">Browse our collection by category</p>
+    </div> -->
+
+
     <div class="row mb-5">
       <div class="col-12">
-        <h1 class="text-center mb-4">Product <span class="text-primary">Categories</span></h1>
-        <p class="text-center text-muted">Browse our collection by category</p>
+        <h1 class="text-center">Product <span class="text-primary">Categories</span></h1>
+        <p class="text-center text-secondary">Browse our collection by category</p>
       </div>
     </div>
 
-    <!-- Categories Grid -->
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6" *ngFor="let category of categories">
-        <div class="category-card" (click)="viewCategory(category)">
+      <div class="col-md-6 col-lg-4" *ngFor="let category of categories">
+        <div class="category-card">
           <div class="category-image">
-            <img [src]="getPreviewProduct(category)?.image" [alt]="category" class="img-fluid">
+            <swiper-container 
+              [init]="false"
+              (mouseenter)="pauseSwiper($event)"
+              (mouseleave)="resumeSwiper($event)">
+              <swiper-slide *ngFor="let product of getCategoryProducts(category)">
+                <img 
+                  [src]="product.image" 
+                  [alt]="product.name"
+                  class="img-fluid"
+                  (click)="openProductDetails(product)">
+              </swiper-slide>
+            </swiper-container>
           </div>
           <div class="category-content">
-            <h3>{{category}}</h3>
-            <p>{{getPreviewProduct(category)?.description || 'Explore our ' + category + ' collection'}}</p>
-            <span class="category-count">{{getProductCount(category)}} Products</span>
-            <a class="category-link">View Collection <i class="bi bi-arrow-right"></i></a>
+            <h3>{{ category }}</h3>
+            <p class="text-secondary">{{ getPreviewProduct(category)?.description || 'Explore ' + category + ' gaming controllers' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-primary">{{ getProductCount(category) }} Products</span>
+              <button class="btn btn-link text-primary p-0" (click)="viewCategory(category); $event.stopPropagation()">
+                View Collection <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>

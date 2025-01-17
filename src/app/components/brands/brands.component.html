@@ -1,28 +1,39 @@
 <section class="brands-page">
-  <div class="container py-5">
+  <div class="container">
+
     <div class="row mb-5">
       <div class="col-12">
-        <h1 class="text-center mb-4">Our <span class="text-primary">Brands</span></h1>
-        <p class="text-center text-muted">Discover premium gaming controllers from top brands</p>
+        <h1 class="text-center">Our <span class="text-primary">Brands</span></h1>
+        <p class="text-center text-secondary">Browse our collection by brand</p>
       </div>
     </div>
 
-    <!-- Brands Grid -->
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6" *ngFor="let brand of brands">
-        <div class="brand-card" (click)="viewBrand(brand)">
+      <div class="col-md-6 col-lg-4" *ngFor="let brand of brands">
+        <div class="brand-card">
           <div class="brand-image">
-            <img *ngIf="brand.image" [src]="brand.image" [alt]="brand.name" class="img-fluid brand-logo">
-            <img *ngIf="!brand.image" [src]="getPreviewProduct(brand.name)?.image" [alt]="brand.name" class="img-fluid">
+            <swiper-container 
+              [init]="false"
+              (mouseenter)="pauseSwiper($event)"
+              (mouseleave)="resumeSwiper($event)">
+              <swiper-slide *ngFor="let product of getBrandProducts(brand.name)">
+                <img 
+                  [src]="product.image" 
+                  [alt]="product.name"
+                  class="img-fluid"
+                  (click)="openProductDetails(product)">
+              </swiper-slide>
+            </swiper-container>
           </div>
           <div class="brand-content">
-            <div class="brand-header">
-              <h3>{{brand.name}}</h3>
-              <i [class]="brand.icon" *ngIf="brand.icon"></i>
+            <h3>{{ brand.name }}</h3>
+            <p class="text-secondary">{{ brand.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-primary">{{ getProductCount(brand.name) }} Products</span>
+              <button class="btn btn-link text-primary p-0" (click)="viewBrand(brand); $event.stopPropagation()">
+                View Collection <i class="bi bi-arrow-right"></i>
+              </button>
             </div>
-            <p>{{getPreviewProduct(brand.name)?.description || 'Explore ' + brand.name + ' gaming controllers'}}</p>
-            <span class="brand-count">{{getProductCount(brand.name)}} Products</span>
-            <a class="brand-link">View Collection <i class="bi bi-arrow-right"></i></a>
           </div>
         </div>
       </div>
