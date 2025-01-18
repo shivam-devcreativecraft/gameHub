@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScrollService } from './services/scroll.service';
 declare var Swiper: any;
 
 @Component({
@@ -10,12 +11,12 @@ declare var Swiper: any;
 export class AppComponent implements OnInit {
   title = 'gamingcontrollers';
 
-  constructor(private router: Router) {
-    // this.router.navigate(['']);
-  }
+  constructor(
+    private router: Router,
+    private scrollService: ScrollService
+  ) {}
 
   ngOnInit() {
-    
     setTimeout(() => {
       this.initializeSwiper();
     }, 100);
