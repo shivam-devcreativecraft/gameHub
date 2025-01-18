@@ -7,6 +7,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
+import { CompareComponent } from './components/compare/compare.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'brands', component: BrandsComponent },
   { path: 'brand/:name', component: BrandDetailsComponent },
   { path: 'category/:name', component: CategoryDetailsComponent },
-  { path: 'preview/:id/:name', component: ProductPreviewComponent }
+  { path: 'preview/:id/:name', component: ProductPreviewComponent },
+  { path: 'compare', component: CompareComponent }
 ];
 
 @NgModule({

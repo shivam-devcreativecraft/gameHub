@@ -184,4 +184,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       faq.answer.toLowerCase().includes(query)
     );
   }
+
+  navigateToCompare(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.router.navigate(['/compare']);
+  }
 }

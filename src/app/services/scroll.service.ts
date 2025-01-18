@@ -16,6 +16,9 @@ export class ScrollService {
   }
 
   scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const mainContent = document.getElementById('main-content');
+    if (mainContent) {
+      mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 } 

@@ -8,7 +8,7 @@
           <h1 class="display-3 fw-bold mb-4">Find Your Perfect <br><span class="text-gradient">Gaming Controller</span></h1>
           <p class="lead mb-4 text-secondary">Compare the best gaming controllers from PlayStation, Xbox, Cosmic Byte, and Redgear. Expert reviews and best deals for every budget.</p>
           <div class="hero-buttons d-flex flex-wrap gap-3">
-            <button class="btn btn-primary btn-lg rounded-pill px-4 py-3 d-flex align-items-center">
+            <button class="btn btn-primary btn-lg rounded-pill px-4 py-3 d-flex align-items-center" (click)="navigateToCompare()">
               <i class="bi bi-search me-2"></i> Compare Controllers
             </button>
             <!-- <button class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 d-flex align-items-center">
@@ -280,11 +280,11 @@
         <h2 class="section-title mb-4">Ready to Find Your Perfect Controller?</h2>
         <p class="lead mb-4">Compare prices, features, and reviews of the best gaming controllers available in India</p>
         <div class="d-flex justify-content-center gap-3">
-          <button class="btn btn-primary btn-lg rounded-pill px-4">
-            Start Comparing
+          <button class="btn btn-primary btn-lg rounded-pill px-4" (click)="navigateToCompare()">
+            <i class="bi bi-arrow-left-right me-2"></i>Start Comparing
           </button>
           <!-- <button class="btn btn-outline-light btn-lg rounded-pill px-4">
-            View Buying Guide
+            <i class="bi bi-info-circle me-2"></i> View Buying Guide
           </button> -->
         </div>
       </div>
